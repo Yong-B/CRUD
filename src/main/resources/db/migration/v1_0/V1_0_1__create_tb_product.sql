@@ -1,19 +1,19 @@
-CREATE TABLE IF NOT EXISTS product(
+CREATE TABLE IF NOT EXISTS product (
     id          BIGSERIAL,
-    name        VARCHAR(255),
+    name        VARCHAR(255)    NOT NULL,
     description TEXT,
+     price       INT    NOT NULL DEFAULT 0,  -- ✅ 추가
 
-    status      VARCHAR(255),
-    created_at  TIMESTAMP       DEFAULT NOW(),
+    status      VARCHAR(255)    NOT NULL DEFAULT 'AVAILABLE',
+    created_at  TIMESTAMP   NOT NULL DEFAULT NOW(),
     updated_at  TIMESTAMP,
 
     CONSTRAINT pk_product PRIMARY KEY (id)
 );
 
--- 테이블 코멘트
-COMMENT ON TABLE product IS '상품';
+CREATE INDEX idx_product_created_at ON product (created_at DESC);
 
--- 컬럼 코멘트
+COMMENT ON TABLE product IS '상품';
 COMMENT ON COLUMN product.name          IS '상품명';
 COMMENT ON COLUMN product.description   IS '상품 설명';
 COMMENT ON COLUMN product.status        IS '상태';
