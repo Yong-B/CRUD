@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface OrderSelectOneUseCase {
     Order findById(Long orderId);
-    List<Order> findAll();
 }
