@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS product (
     id          BIGSERIAL,
     name        VARCHAR(255)    NOT NULL,
     description TEXT,
-     price       INT    NOT NULL DEFAULT 0,  -- ✅ 추가
+     price       INT    NOT NULL DEFAULT 0,
 
     status      VARCHAR(255)    NOT NULL DEFAULT 'AVAILABLE',
     created_at  TIMESTAMP   NOT NULL DEFAULT NOW(),
