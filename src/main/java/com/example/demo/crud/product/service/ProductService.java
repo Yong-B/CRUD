@@ -24,7 +24,7 @@ public class ProductService implements ProductSelectAllUseCase, ProductSaveUseCa
     
     @Override
     public Page<Product> findAll(Pageable pageable) {
-        return productRepository.findAll(pageable);
+        return productRepository.findByStatus(ProductStatus.AVAILABLE, pageable);
     }
 
     @Override
@@ -47,8 +47,9 @@ public class ProductService implements ProductSelectAllUseCase, ProductSaveUseCa
     }
 
     @Override
+    @Transactional
     public void delete(Long productId) {
-        Product findItem = findById(productId);
-        productRepository.delete(findItem);
+        Product product = findById(productId);
+        product.delete();
     }
 }

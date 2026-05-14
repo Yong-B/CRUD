@@ -1,6 +1,7 @@
 package com.example.demo.crud.product.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -54,6 +55,10 @@ public class Product {
         this.name = name;
         this.price = price;
         this.description = description;
+    }
+
+    public void delete() {
+        this.status = ProductStatus.DELETED;
     }
 }
 
