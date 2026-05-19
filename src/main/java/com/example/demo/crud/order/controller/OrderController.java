@@ -3,7 +3,6 @@ package com.example.demo.crud.order.controller;
 import com.example.demo.crud.order.domain.Order;
 import com.example.demo.crud.order.service.usecase.OrderSaveUseCase;
 import com.example.demo.crud.order.service.usecase.OrderSelectAllUseCase;
-import com.example.demo.crud.order.service.usecase.OrderSelectOneUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,16 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
 
     private final OrderSaveUseCase orderSaveUseCase;
-    private final OrderSelectOneUseCase orderSelectOneUseCase;
     private final OrderSelectAllUseCase orderSelectAllUseCase;
 
     @PostMapping("/item/products/{productId}/order")
@@ -38,5 +33,5 @@ public class OrderController {
         model.addAttribute("orders", orders);
         return "item/orders"; // templates/order/order-list.html
     }
-    
+
 }
