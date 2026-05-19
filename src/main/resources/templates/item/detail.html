@@ -80,6 +80,11 @@
         <span class="value" th:text="|${#numbers.formatInteger(product.price, 1, 'COMMA')}원|">0원</span>
     </div>
 
+    <div class="info-group">
+        <span class="label">재고</span>
+        <span class="value" th:text="${product.stock + '개'}">0개</span>
+    </div>
+
     <!-- 상품 설명 -->
     <div class="info-group">
         <span class="label">상품 설명</span>

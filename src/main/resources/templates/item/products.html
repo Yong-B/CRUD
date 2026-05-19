@@ -62,6 +62,7 @@
             <th>ID</th>
             <th>상품명</th>
             <th>가격</th>
+            <th>재고</th>
             <th>관리</th>
         </tr>
         </thead>
@@ -78,6 +79,7 @@
                 </a>
             </td>
             <td th:text="${#numbers.formatInteger(product.price, 1, 'COMMA') + '원'}">0원</td>
+            <td th:text="${product.stock + '개'}">0개</td>
             <td>
                 <!-- 삭제 기능은 추후 구현 -->
                 <button class="btn-delete"
@@ -88,7 +90,7 @@
 
         <!-- 만약 데이터가 하나도 없을 때 보여줄 메시지 (선택사항) -->
         <tr th:if="${products.isEmpty()}">
-            <td colspan="4" style="text-align: center;">등록된 상품이 없습니다.</td>
+            <td colspan="5" style="text-align: center;">등록된 상품이 없습니다.</td>
         </tr>
         </tbody>
     </table>
