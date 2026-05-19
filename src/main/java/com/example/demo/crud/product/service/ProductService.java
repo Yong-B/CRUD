@@ -30,7 +30,7 @@ public class ProductService implements ProductSelectAllUseCase, ProductSaveUseCa
     @Override
     public Product findById(Long id) {
         return productRepository.findProductById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Item not found with id: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("상품 찾을 수 없음: " + id));
     }
 
     @Transactional
@@ -40,6 +40,7 @@ public class ProductService implements ProductSelectAllUseCase, ProductSaveUseCa
         findItem.updateInfo(
                 updateParam.getName(),
                 updateParam.getPrice(),
+                updateParam.getStock(),
                 updateParam.getDescription()
         );
 
