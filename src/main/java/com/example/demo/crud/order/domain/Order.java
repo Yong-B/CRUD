@@ -26,8 +26,10 @@ public class Order {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
     
+    
+
     @CreatedDate
-    @Column(name = "created_at", 
+    @Column(name = "created_at",
             updatable = false
     )
     private LocalDateTime createdAt;
