@@ -13,8 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class OrderService implements OrderSaveUseCase, OrderSelectOneUseCase, OrderSelectAllUseCase{
@@ -25,8 +23,10 @@ public class OrderService implements OrderSaveUseCase, OrderSelectOneUseCase, Or
     @Override
     @Transactional
     public Order save(Long productId) {
-        Product product = productRepository.findProductById(productId)
+        Product product = productRepository.findByIdWithLock(productId)
                 .orElseThrow(() -> new IllegalArgumentException(String.valueOf(productId)));
+        
+        product.decreaseStock();
         
         Order order = Order.builder()
                 .product(product)
