@@ -31,21 +31,6 @@ public class ProductController {
         Page<Product> products;
         products = productSelectAllUseCase.findAll(pageable);
         model.addAttribute("products", products);
-        
-        
-       /* if (searchKeyword == null) {
-            items = itemSelectAllUseCase.findAll(pageable);
-        } else {
-            items = itemSelectAllUseCase.searchByItemName(searchKeyword, pageable);
-        }
-
-        model.addAttribute("searchKeyword", searchKeyword);
-
-        // 검색 결과 없을 때 메시지 추가
-        if (products.isEmpty()) {
-            model.addAttribute("noResultsMessage", "게시글이 없어요. 검색어를 수정하시거나, 다른 조건으로 검색해주세요.");
-        }*/ //상품 검색 추후
-
         return "item/products";
     }
 

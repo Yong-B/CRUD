@@ -24,13 +24,13 @@ public class ProductService implements ProductSelectAllUseCase, ProductSaveUseCa
     
     @Override
     public Page<Product> findAll(Pageable pageable) {
-        return productRepository.findAll(pageable);
+        return productRepository.findByStatus(ProductStatus.AVAILABLE, pageable);
     }
 
     @Override
     public Product findById(Long id) {
         return productRepository.findProductById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Item not found with id: " + id));
+                .orElseThrow(() -> new IllegalArgumentException("상품 찾을 수 없음: " + id));
     }
 
     @Transactional
@@ -40,6 +40,7 @@ public class ProductService implements ProductSelectAllUseCase, ProductSaveUseCa
         findItem.updateInfo(
                 updateParam.getName(),
                 updateParam.getPrice(),
+                updateParam.getStock(),
                 updateParam.getDescription()
         );
 
@@ -47,8 +48,9 @@ public class ProductService implements ProductSelectAllUseCase, ProductSaveUseCa
     }
 
     @Override
+    @Transactional
     public void delete(Long productId) {
-        Product findItem = findById(productId);
-        productRepository.delete(findItem);
+        Product product = findById(productId);
+        product.delete();
     }
 }

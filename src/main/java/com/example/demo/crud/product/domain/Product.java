@@ -26,6 +26,9 @@ public class Product {
 
     @Column(name = "price", nullable = false)
     private int price;
+
+    @Column(name = "stock", nullable = false)
+    private int stock;
     
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
@@ -43,17 +46,35 @@ public class Product {
     private LocalDateTime updatedAt;
 
     @Builder
-    private Product(String name, int price, String description, ProductStatus status) {
+    private Product(String name, int price, int stock, String description, ProductStatus status) {
         this.name = name;
         this.price = price;
+        this.stock = stock;
         this.description = description;
         this.status = (status != null) ? status : ProductStatus.AVAILABLE; // String -> Enum
     }
 
-    public void updateInfo(String name, int price, String description) {
+    public void updateInfo(String name, int price, int stock, String description) {
         this.name = name;
         this.price = price;
+        this.stock = stock;
         this.description = description;
+    }
+
+    public void delete() {
+        this.status = ProductStatus.DELETED; 
+    }
+    
+    public void decreaseStock() {
+        if (this.stock <= 0) {
+            throw new IllegalStateException("재고가 부족합니다.");
+        }
+
+        this.stock -= 1;
+
+        if (this.stock == 0) {
+            this.status = ProductStatus.SOLD_OUT;
+        }
     }
 }
 

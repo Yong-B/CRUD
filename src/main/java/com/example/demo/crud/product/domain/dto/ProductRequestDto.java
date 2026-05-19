@@ -15,7 +15,6 @@ import lombok.*;
 public class ProductRequestDto {
 
     @NotBlank(message = "상품명은 필수입니다.")
-    @Size(min = 3, message = "상품명은 3자 이상이어야 합니다.")
     @Size(max = 50, message = "상품명은 50자 이하여야 합니다.")
     private String name;
 
@@ -27,11 +26,16 @@ public class ProductRequestDto {
     @Min(value = 0, message = "가격은 0원 이상이어야 합니다.")
     private Integer price;
 
+    @NotNull(message = "재고는 필수입니다.")
+    @Min(value = 1, message = "재고는 1개 이상이어야 합니다.")
+    private Integer stock;
+
     public Product toEntity() {
         return Product.builder()
                 .name(this.name)
                 .description(this.description)
                 .price(this.price)
+                .stock(this.stock)
                 .build();
     }
 }
